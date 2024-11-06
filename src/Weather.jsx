@@ -7,6 +7,7 @@ import sunnyClear from './assets/sunnyclear.mp4';
 import cloud from './assets/cloud.mp4';
 import rain from './assets/rain.mp4';
 import fog from './assets/fog.mp4';
+import night from './assets/night.mp4';
 
 import './App.css';
 export default function Weather(){
@@ -16,6 +17,8 @@ export default function Weather(){
     const [weatherInfo, setWeatherInfo] = useState(null);
     const [videoSource, setVideoSource] = useState("");
     const [city, setCity] = useState("");
+
+
 
     useEffect(() => {
         if(navigator.geolocation){
@@ -54,12 +57,18 @@ export default function Weather(){
 
         const data =  await response.json();
 
+        const currentTime = data.dt;
+        const sunriseTime = data.sys.sunrise;
+        const sunsetTime = data.sys.sunset;
+    
+        const timeOfDay = (currentTime >= sunriseTime && currentTime <= sunsetTime) ? "day" : "night";
         const weatherInfo = {
             temperature: data.main.temp,
             description : data.weather[0].description,
             humidity: data.main.humidity,
             cityName: data.name,
             icon: data.weather[0].icon,
+            timeOfDay: timeOfDay,
         };
 
         setWeatherInfo(weatherInfo);
@@ -95,8 +104,12 @@ export default function Weather(){
         } else {
             setVideoSource(sunny); 
         }
+
+        if (weatherInfo.description === "clear sky" && timeOfDay === "night") {
+            setVideoSource(night);
+        }
     }
-        
+    
     catch(error){
         console.log(error);
     }
@@ -109,7 +122,7 @@ export default function Weather(){
     }, [latitude, longitude])
 
     const handleSearch = () => {
-fetchWeatherData(null, null, city);
+       fetchWeatherData(null, null, city);
     }
     return(
                 <div className="weather-app">
