@@ -64,11 +64,15 @@ export default function Weather(){
         const timeOfDay = (currentTime >= sunriseTime && currentTime <= sunsetTime) ? "day" : "night";
         const weatherInfo = {
             temperature: data.main.temp,
+            pressure: data.main.pressure,
             description : data.weather[0].description,
             humidity: data.main.humidity,
+            wind: data.wind.speed,
             cityName: data.name,
             icon: data.weather[0].icon,
             timeOfDay: timeOfDay,
+            sunrise: data.city.sunrise,
+            sunset: data.city.sunset,
         };
 
         setWeatherInfo(weatherInfo);
@@ -141,7 +145,11 @@ export default function Weather(){
                 <div className="weather-info">
                     <h2>Weather in {weatherInfo.cityName}</h2>
                     <p>Temperature: {weatherInfo.temperature}°C</p>
+                    <p>Pressure: {weatherInfo.pressure}hPa</p>
+                    <p>Wind: {weatherInfo.wind}m/s</p>
                     <p>Condition: {weatherInfo.description}</p>
+                    <p>Sunrise: {weatherInfo.sunrise}</p>
+                    <p>Sunset: {weatherInfo.sunset}</p>
                     <p>Humidity: {weatherInfo.humidity}%</p>
                     <img
                         src={`http://openweathermap.org/img/wn/${weatherInfo.icon}.png`}
