@@ -105,9 +105,10 @@ export default function Weather(){
             setVideoSource(sunny); 
         }
 
-        if (weatherInfo.description === "clear sky" && timeOfDay === "night") {
+        if (weatherInfo.description === "clear sky" && timeOfDay === "night" || weatherInfo.description === "scattered clouds" && timeOfDay === "night" || weatherInfo.description === "broken clouds" && timeOfDay === "night" || weatherInfo.description === "few clouds" && timeOfDay === "night" || weatherInfo.description === "overcast clouds" && timeOfDay === "night") {
             setVideoSource(night);
         }
+        
     }
     
     catch(error){
