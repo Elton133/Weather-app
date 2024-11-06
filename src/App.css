@@ -1,0 +1,130 @@
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
+
+/* Wrapper for the entire weather application */
+.weather-app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: Fredoka, sans-serif;
+  color: #fff; 
+}
+
+.weather-app video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; 
+}
+
+
+.weather-info {
+  position: relative;
+  text-align: center;
+  z-index: 1; 
+
+}
+
+.weather-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.weather-info p {
+  font-size: 1.1rem;
+  margin: 5px 0;
+}
+
+.weather-info img {
+  width: 60px;
+  height: 60px;
+  margin-top: 5px;
+}
+
+.weather-app p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 60px;
+  aspect-ratio: 2;
+  --_g: no-repeat radial-gradient(circle closest-side,#000 90%,#0000);
+  background: 
+    var(--_g) 0%   50%,
+    var(--_g) 50%  50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100%/3) 50%;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {
+    20%{background-position:0%   0%, 50%  50%,100%  50%}
+    40%{background-position:0% 100%, 50%   0%,100%  50%}
+    60%{background-position:0%  50%, 50% 100%,100%   0%}
+    80%{background-position:0%  50%, 50%  50%,100% 100%}
+}
+
+input{
+  font-family: Fredoka, sans-serif;
+  width: 250px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.295);
+  margin-bottom: 3px;
+  border: none;
+}
+input:focus{
+  outline: none;
+}
+input::placeholder{
+  color: #cbcbcb;
+}
