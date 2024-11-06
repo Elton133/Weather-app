@@ -128,3 +128,9 @@ input:focus{
 input::placeholder{
   color: #cbcbcb;
 }
+@media (width <= 768px){
+  input{
+    padding: 1em 1.8em;
+    font-size: 16px;
+  }
+}
