@@ -71,8 +71,6 @@ export default function Weather(){
             cityName: data.name,
             icon: data.weather[0].icon,
             timeOfDay: timeOfDay,
-            sunrise: data.city.sunrise,
-            sunset: data.city.sunset,
         };
 
         setWeatherInfo(weatherInfo);
@@ -148,8 +146,7 @@ export default function Weather(){
                     <p>Pressure: {weatherInfo.pressure}hPa</p>
                     <p>Wind: {weatherInfo.wind}m/s</p>
                     <p>Condition: {weatherInfo.description}</p>
-                    <p>Sunrise: {weatherInfo.sunrise}</p>
-                    <p>Sunset: {weatherInfo.sunset}</p>
+
                     <p>Humidity: {weatherInfo.humidity}%</p>
                     <img
                         src={`http://openweathermap.org/img/wn/${weatherInfo.icon}.png`}
