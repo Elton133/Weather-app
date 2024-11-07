@@ -162,8 +162,10 @@ export default function Weather(){
     }, [latitude, longitude])
 
     const handleSearch = () => {
-       fetchWeatherData(null, null, city);
-       triggerNotification(`Weather in ${city}: ${weatherInfo.description}, ${weatherInfo.temperature}°C`);
+       fetchWeatherData(null, null, city).then(() => {
+        triggerNotification(`Weather in ${city}: ${weatherInfo.description}, ${weatherInfo.temperature}°C`);
+    });
+       
     }
     return(
                 <div className="weather-app">
