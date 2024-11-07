@@ -37,6 +37,16 @@ export default function Weather(){
         }
     }, [])
 
+    useEffect(() => {
+        if ("Notification" in window) {
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    console.log("Notifications enabled.");
+                }
+            });
+        }
+    }, []);
+    
     const fetchWeatherData = async(latitude, longitude, city) => {
         let APIURL;
         const APIKEY = "9c147fb22fee856e10e3555376b62810";
@@ -119,6 +129,30 @@ export default function Weather(){
     catch(error){
         console.log(error);
     }
+
+    const triggerNotification = (message) =>{
+        if("Notification" in window && Notification.permission === "granted"){
+            new Notification("Weather", {
+                body: message,
+                icons:  `http://openweathermap.org/img/wn/${weatherInfo.icon}.png`
+            });
+        }
+    };
+    
+    if(data.weather[0].description.includes("storm") || data.weather[0].description.includes("thunderstorm")){
+        triggerNotification("BStorms are expected!");
+    } else if(data.weather[0].description.includes("rain") || data.weather[0].description.includes("drizzle")){
+        triggerNotification("It's going to rain, don't forget your umbrella!");
+    }
+    else if(data.weather[0].description.includes("snow")){
+        triggerNotification("Be careful! It's snowing outside!");
+    }
+    else if (weatherInfo.temperature <= 0) {
+        triggerNotification("Freezing temperatures expected. Dress warmly!");
+    }
+    else if (weatherInfo.temperature >= 35) {
+        triggerNotification("It's really hot outside. Stay hydrated!");
+    }
     };
 
     useEffect(()=>{
@@ -129,6 +163,7 @@ export default function Weather(){
 
     const handleSearch = () => {
        fetchWeatherData(null, null, city);
+       triggerNotification(`Weather in ${city}: ${weatherInfo.description}, ${weatherInfo.temperature}°C`);
     }
     return(
                 <div className="weather-app">

@@ -121,6 +121,7 @@ input{
   background-color: rgba(0, 0, 0, 0.295);
   margin-bottom: 3px;
   border: none;
+  
 }
 input:focus{
   outline: none;
