@@ -60,6 +60,8 @@ export default function Weather(){
         const currentTime = data.dt;
         const sunriseTime = data.sys.sunrise;
         const sunsetTime = data.sys.sunset;
+
+        
     
         const timeOfDay = (currentTime >= sunriseTime && currentTime <= sunsetTime) ? "day" : "night";
         const weatherInfo = {
@@ -70,6 +72,7 @@ export default function Weather(){
             wind: data.wind.speed,
             cityName: data.name,
             icon: data.weather[0].icon,
+            clouds: data.clouds.all,
             timeOfDay: timeOfDay,
         };
 
@@ -146,7 +149,7 @@ export default function Weather(){
                     <p>Pressure: {weatherInfo.pressure}hPa</p>
                     <p>Wind: {weatherInfo.wind}m/s</p>
                     <p>Condition: {weatherInfo.description}</p>
-
+                    <p>Clouds : {weatherInfo.clouds}%</p>
                     <p>Humidity: {weatherInfo.humidity}%</p>
                     <img
                         src={`http://openweathermap.org/img/wn/${weatherInfo.icon}.png`}
