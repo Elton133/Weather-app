@@ -2,6 +2,10 @@
 
 This Weather App displays weather information based on the user’s current location or a specified city. On load, the app uses geolocation to fetch the user’s local weather and also allows for searching weather conditions in other locations.
 
+## Demo
+
+You can see a live demo of the Pricing Panel [here](https://elton-weather.netlify.app).
+
 ## Features
 
 - **Geolocation-Based Weather**: Automatically displays weather for the user’s current location on load.
