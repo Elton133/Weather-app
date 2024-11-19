@@ -8,6 +8,7 @@ import cloud from './assets/cloud.mp4';
 import rain from './assets/rain.mp4';
 import fog from './assets/fog.mp4';
 import night from './assets/night.mp4';
+import night2 from './assets/night2.mp4';
 
 import './App.css';
 export default function Weather(){
@@ -121,7 +122,7 @@ export default function Weather(){
         }
 
         if (weatherInfo.description === "clear sky" && timeOfDay === "night" || weatherInfo.description === "scattered clouds" && timeOfDay === "night" || weatherInfo.description === "broken clouds" && timeOfDay === "night" || weatherInfo.description === "few clouds" && timeOfDay === "night" || weatherInfo.description === "overcast clouds" && timeOfDay === "night") {
-            setVideoSource(night);
+            setVideoSource(night2);
         }
         
     }
