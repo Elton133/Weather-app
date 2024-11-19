@@ -4,7 +4,7 @@ This Weather App displays weather information based on the user’s current loca
 
 ## Demo
 
-You can see a live demo of the Pricing Panel [here](https://elton-weather.netlify.app).
+You can see a live demo of the Weather App [here](https://elton-weather.netlify.app).
 
 ## Features
 
