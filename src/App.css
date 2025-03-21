@@ -42,6 +42,19 @@
 } */
 
 /* Wrapper for the entire weather application */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  color: white;
+  font-family: Fredoka, sans-serif;
+  overflow: hidden; 
+  height: 100vh;
+}
 .weather-app {
   position: relative;
   width: 100vw;
@@ -51,8 +64,8 @@
   justify-content: center;
   flex-direction: column;
   overflow: hidden;
-  font-family: Fredoka, sans-serif;
-  color: #fff; 
+
+  color: #fff;
 }
 
 .weather-app video {
@@ -62,15 +75,13 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -1; 
+  z-index: -1;
 }
-
 
 .weather-info {
   position: relative;
   text-align: center;
-  z-index: 1; 
-
+  z-index: 1;
 }
 
 .weather-info h2 {
@@ -79,7 +90,8 @@
 }
 
 .weather-info p {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
   margin: 5px 0;
 }
 
@@ -98,40 +110,284 @@
 .loader {
   width: 60px;
   aspect-ratio: 2;
-  --_g: no-repeat radial-gradient(circle closest-side,#000 90%,#0000);
-  background: 
-    var(--_g) 0%   50%,
-    var(--_g) 50%  50%,
-    var(--_g) 100% 50%;
-  background-size: calc(100%/3) 50%;
+  --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000);
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 3) 50%;
   animation: l3 1s infinite linear;
 }
 @keyframes l3 {
-    20%{background-position:0%   0%, 50%  50%,100%  50%}
-    40%{background-position:0% 100%, 50%   0%,100%  50%}
-    60%{background-position:0%  50%, 50% 100%,100%   0%}
-    80%{background-position:0%  50%, 50%  50%,100% 100%}
+  20% {
+    background-position: 0% 0%, 50% 50%, 100% 50%;
+  }
+  40% {
+    background-position: 0% 100%, 50% 0%, 100% 50%;
+  }
+  60% {
+    background-position: 0% 50%, 50% 100%, 100% 0%;
+  }
+  80% {
+    background-position: 0% 50%, 50% 50%, 100% 100%;
+  }
 }
 
-input{
+input {
   font-family: Fredoka, sans-serif;
-  width: 250px;
+  width: 100px;
   padding: 10px 15px;
   border-radius: 8px;
   background-color: rgba(0, 0, 0, 0.295);
   margin-bottom: 3px;
   border: none;
-  
 }
-input:focus{
+input:focus {
   outline: none;
 }
-input::placeholder{
+input::placeholder {
   color: #cbcbcb;
 }
-@media (width <= 768px){
-  input{
+@media (width <= 768px) {
+  input {
     padding: 0.6em 1.8em;
     font-size: 16px;
+  }
+}
+
+/* Main app container */
+.app-container {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Video background container */
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Content container */
+.content-container {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fixed search header */
+.search-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+}
+
+.search-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Scrollable content area */
+.scrollable-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  -webkit-overflow-scrolling: touch; 
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Weather info styles */
+/* .weather-info {
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10x;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+} */
+
+.weather-info h2 {
+  margin-bottom: 15px;
+}
+
+.weather-info p {
+  margin-bottom: 10px;
+}
+
+/* Loader */
+.loader {
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 5px solid white;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Region cards container */
+.region-cards-container {
+  margin-top: 30px;
+}
+
+.region-cards-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.region-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Region card */
+.region-card {
+  width: 300px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: transform 0.3s ease;
+}
+
+.region-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Card video container */
+.card-video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.card-video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Card content */
+.card-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Card header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.card-header h4 {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+}
+
+.card-header .continent {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.card-header img {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+}
+
+/* Card details */
+.card-details {
+  margin-top: auto;
+}
+
+.card-details .temperature {
+  font-size: 28px;
+  margin: 0 0 5px 0;
+}
+
+.card-details .description {
+  margin: 0;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.card-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.card-stats p {
+  margin: 0;
+}
+
+/* Scrollbar styling */
+.scrollable-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .search-header {
+    padding: 15px;
+  }
+
+  .scrollable-content {
+    padding: 15px;
+  }
+
+  .region-card {
+    width: 100%;
   }
 }
