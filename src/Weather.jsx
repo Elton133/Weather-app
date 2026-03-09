@@ -14,6 +14,7 @@ import { getCurrentByCity } from "./services/weatherApi";
 export default function Weather() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const suggestionsRef = useRef(null);
+  const bgVideoRef = useRef(null);
 
   const {
     setCoords,
@@ -88,6 +89,39 @@ export default function Weather() {
     return () => clearInterval(intervalId);
   }, [regions]);
 
+  // Try to autoplay background video whenever the source changes
+  useEffect(() => {
+    if (!bgVideoRef.current) return;
+    const video = bgVideoRef.current;
+    const tryPlay = () => {
+      const maybePromise = video.play();
+      if (maybePromise && typeof maybePromise.catch === "function") {
+        maybePromise.catch(() => {
+          // Autoplay can be blocked on some devices; ignore error.
+        });
+      }
+    };
+    tryPlay();
+  }, [videoSource]);
+
+  // On first user interaction (click / touch), ensure video starts on mobile
+  useEffect(() => {
+    const handler = () => {
+      if (bgVideoRef.current && bgVideoRef.current.paused) {
+        const maybePromise = bgVideoRef.current.play();
+        if (maybePromise && typeof maybePromise.catch === "function") {
+          maybePromise.catch(() => {});
+        }
+      }
+    };
+    window.addEventListener("touchstart", handler, { once: true });
+    window.addEventListener("click", handler, { once: true });
+    return () => {
+      window.removeEventListener("touchstart", handler);
+      window.removeEventListener("click", handler);
+    };
+  }, []);
+
   const handleCitySelect = (cityName) => {
     setCityQuery(cityName);
     setShowSuggestions(false);
@@ -113,7 +147,14 @@ export default function Weather() {
     <div className="dashboard-container">
       {videoSource && (
         <div className="video-container">
-          <video src={videoSource} autoPlay loop muted playsInline>
+          <video
+            ref={bgVideoRef}
+            src={videoSource}
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
             <source src={videoSource} type="video/mp4" />
           </video>
         </div>
