@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "short_name": "WeatherApp",
+  "name": "Weather Application",
+  "description": "Get real-time weather updates based on your location or search.",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#1a1a2e",
+  "background_color": "#242424"
+}
